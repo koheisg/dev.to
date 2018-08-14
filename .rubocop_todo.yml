@@ -80,27 +80,6 @@ Security/Open:
     - 'app/labor/podcast_feed.rb'
     - 'app/labor/rss_reader.rb'
 
-# Offense count: 14
-# Cop supports --auto-correct.
-# Configuration parameters: AutoCorrect, EnforcedStyle.
-# SupportedStyles: nested, compact
-Style/ClassAndModuleChildren:
-  Exclude:
-    - 'app/controllers/api/v0/api_controller.rb'
-    - 'app/controllers/internal/application_controller.rb'
-    - 'app/controllers/internal/articles_controller.rb'
-    - 'app/controllers/internal/broadcasts_controller.rb'
-    - 'app/controllers/internal/buffer_updates_controller.rb'
-    - 'app/controllers/internal/comments_controller.rb'
-    - 'app/controllers/internal/dogfood_controller.rb'
-    - 'app/controllers/internal/feedback_messages_controller.rb'
-    - 'app/controllers/internal/members_controller.rb'
-    - 'app/controllers/internal/tags_controller.rb'
-    - 'app/controllers/internal/users_controller.rb'
-    - 'app/controllers/internal/welcome_controller.rb'
-    - 'app/controllers/notifications/counts_controller.rb'
-    - 'app/controllers/notifications/reads_controller.rb'
-
 # Offense count: 1
 Style/EvalWithLocation:
   Exclude:
