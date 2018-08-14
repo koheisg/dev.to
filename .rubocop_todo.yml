@@ -45,8 +45,3 @@ Security/Open:
 Style/EvalWithLocation:
   Exclude:
     - 'app/controllers/omniauth_callbacks_controller.rb'
-
-# Offense count: 3
-Style/MixinUsage:
-  Exclude:
-    - 'app/models/podcast_episode.rb'
