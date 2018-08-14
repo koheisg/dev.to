@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/BlockLength
 json.array! @articles do |article|
   json.type_of            "article"
   json.id                 article.id
@@ -41,3 +42,4 @@ json.array! @articles do |article|
     end
   end
 end
+# rubocop:enable Metrics/BlockLength

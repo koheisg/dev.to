@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/BlockLength
 json.array! Comment.rooted_on(@commentable.id, @commentable_type).order("score DESC") do |comment|
   json.type_of            "comment"
   json.id_code            comment.id_code_generated
@@ -38,3 +39,4 @@ json.array! Comment.rooted_on(@commentable.id, @commentable_type).order("score D
     end
   end
 end
+# rubocop:enable Metrics/BlockLength

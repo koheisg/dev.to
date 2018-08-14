@@ -91,6 +91,7 @@ class Article < ApplicationRecord
     where("boost_states ->> 'boosted_dev_digest_email' = 'true'")
   }
 
+  # rubocop:disable Metrics/BlockLength
   algoliasearch per_environment: true, enqueue: :trigger_delayed_index do
     attribute :title
     add_index "searchables",
@@ -162,6 +163,7 @@ class Article < ApplicationRecord
       end
     end
   end
+  # rubocop:enable Metrics/BlockLength
 
   store_attributes :boost_states do
     boosted_additional_articles Boolean, default: false

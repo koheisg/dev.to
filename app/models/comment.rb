@@ -32,6 +32,7 @@ class Comment < ApplicationRecord
   include StreamRails::Activity
   as_activity
 
+  # rubocop:disable Metrics/BlockLength
   algoliasearch per_environment: true, enqueue: :trigger_delayed_index do
     attribute :id
     add_index "ordered_comments",
@@ -89,6 +90,7 @@ class Comment < ApplicationRecord
       ranking ["desc(created_at)"]
     end
   end
+  # rubocop:enable Metrics/BlockLength
 
   def self.trigger_delayed_index(record, remove)
     if remove

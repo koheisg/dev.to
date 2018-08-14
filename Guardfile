@@ -40,6 +40,7 @@ rspec_options = {
   bundler_env: :clean_env,
 }
 
+# rubocop:disable Metrics/BlockLength
 guard :rspec, rspec_options do
   require "guard/rspec/dsl"
   dsl = Guard::RSpec::Dsl.new(self)
@@ -84,6 +85,7 @@ guard :rspec, rspec_options do
     Dir[File.join("**/#{m[1]}.feature")][0] || "spec/acceptance"
   end
 end
+# rubocop:enable Metrics/BlockLength
 
 guard :livereload do
   watch(%r{app/views/.+\.(erb|haml|slim)$})
