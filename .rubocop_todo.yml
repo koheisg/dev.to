@@ -35,13 +35,6 @@ Metrics/LineLength:
 Metrics/PerceivedComplexity:
   Max: 16
 
-# Offense count: 2
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: snake_case, camelCase
-Naming/VariableName:
-  Exclude:
-    - 'app/liquid_tags/github_tag/github_issue_tag.rb'
-
 # Offense count: 3
 Security/Open:
   Exclude:
