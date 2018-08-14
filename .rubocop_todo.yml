@@ -46,11 +46,6 @@ Style/EvalWithLocation:
   Exclude:
     - 'app/controllers/omniauth_callbacks_controller.rb'
 
-# Offense count: 1
-Style/IfInsideElse:
-  Exclude:
-    - 'app/models/comment.rb'
-
 # Offense count: 3
 Style/MixinUsage:
   Exclude:
