@@ -63,8 +63,8 @@ class Tweet < ApplicationRecord
     make_tweet_from_api_object(t)
   end
 
-  def self.make_tweet_from_api_object(t)
-    t = TwitterBot.new(random_identity).client.status(t.attrs[:retweeted_status][:id_str]) if t.attrs[:retweeted_status]
+  def self.make_tweet_from_api_object(tweeted)
+    t = TwitterBot.new(random_identity).client.status(t.attrs[:retweeted_status][:id_str]) if tweeted.attrs[:retweeted_status]
     tweet = Tweet.where(twitter_id_code: t.attrs[:id_str]).first_or_initialize
     tweet.twitter_uid = t.user.id.to_s
     tweet.twitter_username = t.user.screen_name.downcase

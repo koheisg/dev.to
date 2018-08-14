@@ -16,8 +16,8 @@ module Internal
       @comment_totals_24_hours = frequency(@comments_24_hours)
     end
 
-    def frequency(a)
-      a.group_by do |e|
+    def frequency(comment)
+      comment.group_by do |e|
         e
       end.map do |key, values|
         { number_of_comments: values.size, username: User.find(key).username }

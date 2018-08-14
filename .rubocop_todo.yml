@@ -35,18 +35,6 @@ Metrics/LineLength:
 Metrics/PerceivedComplexity:
   Max: 16
 
-# Offense count: 9
-# Configuration parameters: MinNameLength, AllowNamesEndingInNumbers, AllowedNames, ForbiddenNames.
-# AllowedNames: io, id, to, by, on, in, at, ip
-Naming/UncommunicativeMethodParamName:
-  Exclude:
-    - 'app/controllers/followed_articles_controller.rb'
-    - 'app/controllers/internal/dogfood_controller.rb'
-    - 'app/labor/mailchimp_bot.rb'
-    - 'app/labor/podcast_feed.rb'
-    - 'app/models/chat_channel.rb'
-    - 'app/models/tweet.rb'
-
 # Offense count: 2
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: snake_case, camelCase
