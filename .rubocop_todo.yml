@@ -49,5 +49,4 @@ Style/EvalWithLocation:
 # Offense count: 3
 Style/MixinUsage:
   Exclude:
-    - 'app/models/organization.rb'
     - 'app/models/podcast_episode.rb'
