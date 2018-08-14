@@ -35,14 +35,6 @@ Metrics/LineLength:
 Metrics/PerceivedComplexity:
   Max: 16
 
-# Offense count: 2
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: snake_case, camelCase
-Naming/MethodName:
-  Exclude:
-    - 'app/helpers/articles_helper.rb'
-    - 'app/liquid_tags/podcast_tag.rb'
-
 # Offense count: 4
 # Configuration parameters: NamePrefix, NamePrefixBlacklist, NameWhitelist, MethodDefinitionMacros.
 # NamePrefix: is_, has_, have_
