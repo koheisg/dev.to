@@ -41,7 +41,7 @@ end
 module StreamRails
   class Enrich
     def retrieve_objects(references)
-      Hash[references.map { |model, ids| [model, Hash[construct_query(model, ids).map { |i| [i.id.to_s, i] }]] }]
+      Hash[references.map { |model, ids| [model, Hash[construct_query(model, ids).map { |i| [i.id.to_s, i] }]] }] # rubocop:disable Metrics/LineLength
     end
 
     def construct_query(model, ids)

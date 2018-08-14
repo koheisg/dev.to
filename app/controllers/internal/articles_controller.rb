@@ -117,7 +117,7 @@ module Internal
       article.approved = article_params[:approved].to_s == "true"
       article.live_now = article_params[:live_now].to_s == "true"
       article.email_digest_eligible = article_params[:email_digest_eligible].to_s == "true"
-      article.boosted_additional_articles = article_params[:boosted_additional_articles].to_s == "true"
+      article.boosted_additional_articles = article_params[:boosted_additional_articles].to_s == "true" # rubocop:disable Metrics/LineLength
       article.boosted_dev_digest_email = article_params[:boosted_dev_digest_email].to_s == "true"
       article.update!(article_params)
       if article.live_now

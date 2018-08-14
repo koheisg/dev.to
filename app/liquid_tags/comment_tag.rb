@@ -13,7 +13,7 @@ class CommentTag < LiquidTagBase
     else
       PodcastEpisode.find_by_id(@comment.commentable_id)
     end
-
+    # rubocop:disable Metrics/LineLength
     "<div class=\"liquid-comment\">" \
       "<div class=\"details\">" \
         "<a href=\"/#{@comment.user.username}\">" \
@@ -31,6 +31,7 @@ class CommentTag < LiquidTagBase
         + @comment.processed_html.html_safe + \
       "</div>" \
     "</div>"
+    # rubocop:enable Metrics/LineLength
   end
 
   def render_twitter_and_github

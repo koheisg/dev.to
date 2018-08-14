@@ -12,7 +12,7 @@ module Api
 
       def index
         @articles = ArticleApiIndexService.new(params).get
-        set_surrogate_key_header "articles_api_#{params[:tag]}_#{params[:page]}_#{params[:userame]}_#{params[:signature]}_#{params[:state]}"
+        set_surrogate_key_header "articles_api_#{params[:tag]}_#{params[:page]}_#{params[:userame]}_#{params[:signature]}_#{params[:state]}" # rubocop:disable Metrics/LineLength
       end
 
       def show
@@ -36,7 +36,7 @@ module Api
         end
         Article.tagged_with(tag_list, any: true).
           order("published_at DESC").
-          where("positive_reactions_count > ? OR comments_count > ? AND published = ?", 10, 3, true).
+          where("positive_reactions_count > ? OR comments_count > ? AND published = ?", 10, 3, true). # rubocop:disable Metrics/LineLength
           limit(15).each do |article|
             @articles << article
           end

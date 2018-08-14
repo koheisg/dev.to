@@ -1,6 +1,6 @@
 class ModerationService
   def initialize
-    @available_moderators = User.with_role(:trusted).where("last_moderation_notification < ?", 28.hours.ago)
+    @available_moderators = User.with_role(:trusted).where("last_moderation_notification < ?", 28.hours.ago) # rubocop:disable Metrics/LineLength
   end
 
   def send_moderation_notification(object)

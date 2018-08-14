@@ -8,7 +8,7 @@ class ChatChannel < ApplicationRecord
 
   has_many :active_memberships, -> { where status: "active" }, class_name: "ChatChannelMembership"
   has_many :pending_memberships, -> { where status: "pending" }, class_name: "ChatChannelMembership"
-  has_many :rejected_memberships, -> { where status: "rejected" }, class_name: "ChatChannelMembership"
+  has_many :rejected_memberships, -> { where status: "rejected" }, class_name: "ChatChannelMembership" # rubocop:disable Metrics/LineLength
   has_many :mod_memberships, -> { where role: "mod" }, class_name: "ChatChannelMembership"
   has_many :active_users, through: :active_memberships, class_name: "User", source: :user
   has_many :pending_users, through: :pending_memberships, class_name: "User", source: :user
@@ -25,7 +25,7 @@ class ChatChannel < ApplicationRecord
       :messages_count, :channel_human_names, :channel_mod_ids, :pending_users_select_fields,
       :description
     searchableAttributes %i[channel_name channel_slug channel_human_names]
-    attributesForFaceting ["filterOnly(viewable_by)", "filterOnly(status)", "filterOnly(channel_type)"]
+    attributesForFaceting ["filterOnly(viewable_by)", "filterOnly(status)", "filterOnly(channel_type)"] # rubocop:disable Metrics/LineLength
     ranking ["desc(last_message_at)"]
   end
 
@@ -57,7 +57,7 @@ class ChatChannel < ApplicationRecord
       contrived_name = "Direct chat between " + usernames.join(" and ")
       slug = usernames.join("/")
     else
-      slug = contrived_name.to_s.downcase.tr(" ", "-").gsub(/[^\w-]/, "").tr("_", "") + "-" + rand(100000).to_s(26)
+      slug = contrived_name.to_s.downcase.tr(" ", "-").gsub(/[^\w-]/, "").tr("_", "") + "-" + rand(100000).to_s(26) # rubocop:disable Metrics/LineLength
     end
 
     if channel = ChatChannel.find_by_slug(slug)

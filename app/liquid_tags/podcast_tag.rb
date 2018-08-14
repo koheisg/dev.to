@@ -58,7 +58,7 @@ class PodcastTag < LiquidTagBase
 
   def render_style
     "background:##{@podcast.main_color_hex} " \
-    "url(#{cl_image_path(@podcast.pattern_image_url || 'https://i.imgur.com/fKYKgo4.png', type: 'fetch', quality: 'auto', sign_url: true, flags: 'progressive', fetch_format: 'jpg')})"
+    "url(#{cl_image_path(@podcast.pattern_image_url || 'https://i.imgur.com/fKYKgo4.png', type: 'fetch', quality: 'auto', sign_url: true, flags: 'progressive', fetch_format: 'jpg')})" # rubocop:disable Metrics/LineLength
   end
 
   def render_hidden_audio

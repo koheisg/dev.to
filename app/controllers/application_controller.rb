@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     location = request.env["omniauth.origin"] || stored_location_for(resource) || "/dashboard"
-    context_param = resource.created_at > 40.seconds.ago ? "?newly-registered-user=true" : "?returning-user=true"
+    context_param = resource.created_at > 40.seconds.ago ? "?newly-registered-user=true" : "?returning-user=true" # rubocop:disable Metrics/LineLength
     location + context_param
   end
 
@@ -53,11 +53,11 @@ class ApplicationController < ActionController::Base
     # We are at least secure for now.
     return if Rails.env.test?
     if request.referer.present?
-      request.referer.start_with?(ApplicationConfig["APP_PROTOCOL"].to_s + ApplicationConfig["APP_DOMAIN"].to_s)
+      request.referer.start_with?(ApplicationConfig["APP_PROTOCOL"].to_s + ApplicationConfig["APP_DOMAIN"].to_s) # rubocop:disable Metrics/LineLength
     else
       logger.info "**REQUEST ORIGIN CHECK** #{request.origin}"
       raise InvalidAuthenticityToken, NULL_ORIGIN_MESSAGE if request.origin == "null"
-      request.origin.nil? || request.origin.gsub("https", "http") == request.base_url.gsub("https", "http")
+      request.origin.nil? || request.origin.gsub("https", "http") == request.base_url.gsub("https", "http") # rubocop:disable Metrics/LineLength
     end
   end
 

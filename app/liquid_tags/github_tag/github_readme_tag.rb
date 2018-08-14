@@ -32,7 +32,7 @@ class GithubTag
       user_name = repo_details[0]
       repo_name = repo_details[1]
       client = Octokit::Client.new(access_token: token)
-      @readme_html = client.readme user_name + "/" + repo_name, accept: "application/vnd.github.html"
+      @readme_html = client.readme user_name + "/" + repo_name, accept: "application/vnd.github.html" # rubocop:disable Metrics/LineLength
       @readme = client.readme user_name + "/" + repo_name
       @updated_html = clean_relative_path!(@readme_html, @readme.download_url)
       client.repository(user_name + "/" + repo_name)

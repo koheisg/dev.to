@@ -34,7 +34,7 @@ class UserRoleService
 
   def new_roles?(params)
     params[:trusted] == "1" ? @user.add_role(:trusted) : @user.remove_role(:trusted)
-    params[:analytics] == "1" ? @user.add_role(:analytics_beta_tester) : @user.remove_role(:analytics_beta_tester)
+    params[:analytics] == "1" ? @user.add_role(:analytics_beta_tester) : @user.remove_role(:analytics_beta_tester) # rubocop:disable Metrics/LineLength
     if params[:scholar] == "1"
       @user.add_role(:workshop_pass)
       @user.update(workshop_expiration: params[:workshop_expiration])

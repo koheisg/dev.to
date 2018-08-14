@@ -22,6 +22,7 @@ class GithubTag
       date = Date.parse(content_json[:created_at].to_s).strftime("%b %d, %Y")
       date_link = content_json[:html_url]
       title = generate_title
+      # rubocop:disable Metrics/LineLength
       html = "" \
       "<div class=\"ltag_github-liquid-tag\"> "\
         "#{title}" \
@@ -44,7 +45,7 @@ class GithubTag
           "<div class=\"gh-btn-container\"><a class=\"gh-btn\" href=\"#{date_link}\">View on GitHub</a></div>"\
         "</div> " \
       "</div>"
-
+      # rubocop:enable Metrics/LineLength
       finalize_html(html)
     end
 
@@ -74,16 +75,18 @@ class GithubTag
       number = content_json[:number]
       link = content_json[:html_url]
       return unless title
+      # rubocop:disable Metrics/LineLength
       "<h1> " \
         "<a href=\"#{link}\">" \
           "<img class=\"github-logo\" src=\"#{ActionController::Base.helpers.asset_path('github-logo.svg')}\" /><span class=\"issue-title\">#{title}</span> <span class=\"issue-number\">##{number}</span> " \
         "</a>" \
       "</h1> "
+      # rubocop:enable Metrics/LineLength
     end
 
     def finalize_html(input)
       input.gsub(/(?!<code[^>]*?>)(@[a-zA-Z]{3,})(?![^<]*?<\/code>)/) do |target|
-        "<a class=\"github-user-link\" href=\"https://github.com/#{target.delete('@')}\">#{target}</a>"
+        "<a class=\"github-user-link\" href=\"https://github.com/#{target.delete('@')}\">#{target}</a>" # rubocop:disable Metrics/LineLength
       end.html_safe
     end
 

@@ -25,6 +25,6 @@ class ProfileImage
   end
 
   def get_external_link
-    image_link ? "#{ApplicationConfig['APP_PROTOCOL']}#{ApplicationConfig['APP_DOMAIN']}#{image_link}" : backup_link
+    image_link ? "#{ApplicationConfig['APP_PROTOCOL']}#{ApplicationConfig['APP_DOMAIN']}#{image_link}" : backup_link # rubocop:disable Metrics/LineLength
   end
 end

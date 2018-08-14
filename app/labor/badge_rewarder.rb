@@ -14,7 +14,7 @@ module BadgeRewarder
 
   def self.award_beloved_comment_badges
     Comment.where("positive_reactions_count > ?", 24).each do |comment|
-      message = "You're DEV famous! [This is the comment](https://dev.to#{comment.path}) for which you are being recognized. 😄"
+      message = "You're DEV famous! [This is the comment](https://dev.to#{comment.path}) for which you are being recognized. 😄" # rubocop:disable Metrics/LineLength
       achievement = BadgeAchievement.create(
         user_id: comment.user_id,
         badge_id: 3,

@@ -91,7 +91,7 @@ class StoriesController < ApplicationController
     @featured_story = Article.new
     @article_index = true
     set_surrogate_key_header "articles-#{@tag}", @stories.map(&:record_key)
-    response.headers["Surrogate-Control"] = "max-age=600, stale-while-revalidate=30, stale-if-error=86400"
+    response.headers["Surrogate-Control"] = "max-age=600, stale-while-revalidate=30, stale-if-error=86400" # rubocop:disable Metrics/LineLength
     render template: "articles/index"
   end
 
@@ -118,7 +118,7 @@ class StoriesController < ApplicationController
     @article_index = true
     @sidebar_ad = DisplayAd.where(approved: true, published: true, placement_area: "sidebar").first
     set_surrogate_key_header "articles", @stories.map(&:record_key)
-    response.headers["Surrogate-Control"] = "max-age=600, stale-while-revalidate=30, stale-if-error=86400"
+    response.headers["Surrogate-Control"] = "max-age=600, stale-while-revalidate=30, stale-if-error=86400" # rubocop:disable Metrics/LineLength
     render template: "articles/index"
   end
 
@@ -204,7 +204,7 @@ class StoriesController < ApplicationController
     set_surrogate_key_header @article.record_key
     @classic_article = Suggester::Articles::Classic.new(@article).get
     unless user_signed_in?
-      response.headers["Surrogate-Control"] = "max-age=10000, stale-while-revalidate=30, stale-if-error=86400"
+      response.headers["Surrogate-Control"] = "max-age=10000, stale-while-revalidate=30, stale-if-error=86400" # rubocop:disable Metrics/LineLength
     end
     return redirect_if_show_view_param if performed?
     render template: "articles/show"
@@ -239,7 +239,8 @@ class StoriesController < ApplicationController
 
   def assign_organization_article
     @article = @organization.articles.find_by_slug(params[:slug])&.decorate
-    @user = @article&.user || not_found # The org may have changed back to user and this does not handle that properly
+    # The org may have changed back to user and this does not handle that properly
+    @user = @article&.user || not_found
   end
 
   def assign_user_article
@@ -289,7 +290,7 @@ class StoriesController < ApplicationController
     article_tags.delete("discuss")
     tag_articles = Article.tagged_with(article_tags, any: true).
       includes(:user).
-      where("positive_reactions_count > ? OR comments_count > ?", reaction_count_num, comment_count_num).
+      where("positive_reactions_count > ? OR comments_count > ?", reaction_count_num, comment_count_num). # rubocop:disable Metrics/LineLength
       where(published: true).
       where.not(id: @article.id, user_id: @article.user_id).
       limited_column_select.
@@ -297,7 +298,7 @@ class StoriesController < ApplicationController
       order("RANDOM()").
       limit(8)
     if tag_articles.size < 6
-      more_articles = Article.tagged_with(["career", "productivity", "discuss", "explainlikeimfive"], any: true).
+      more_articles = Article.tagged_with(["career", "productivity", "discuss", "explainlikeimfive"], any: true). # rubocop:disable Metrics/LineLength
         includes(:user).
         where("comments_count > ?", comment_count_num).
         limited_column_select.

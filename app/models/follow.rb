@@ -71,7 +71,7 @@ class Follow < ApplicationRecord
   handle_asynchronously :create_chat_channel
 
   def send_email_notification
-    if followable.class.name == "User" && followable.email.present? && followable.email_follower_notifications
+    if followable.class.name == "User" && followable.email.present? && followable.email_follower_notifications # rubocop:disable Metrics/LineLength
       return if EmailMessage.where(user_id: followable.id).
           where("sent_at > ?", rand(15..35).hours.ago).
           where("subject LIKE ?", "%followed you on dev.to%").any?
@@ -83,7 +83,7 @@ class Follow < ApplicationRecord
   def modify_chat_channel_status
     if followable_type == "User" && followable.following?(follower)
       follower.chat_channels.
-        where("slug LIKE ? OR slug like ?", "%/#{followable.username}%", "%#{followable.username}/%").
+        where("slug LIKE ? OR slug like ?", "%/#{followable.username}%", "%#{followable.username}/%"). # rubocop:disable Metrics/LineLength
         first.update(status: "inactive")
     end
   end

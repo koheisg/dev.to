@@ -1,6 +1,6 @@
 module ArticlesHelper
   def has_vid?(article)
-    article.processed_html.include?("youtube.com/embed/") || article.processed_html.include?("player.vimeo.com") || article.comments_blob.include?("youtube")
+    article.processed_html.include?("youtube.com/embed/") || article.processed_html.include?("player.vimeo.com") || article.comments_blob.include?("youtube") # rubocop:disable Metrics/LineLength
   end
 
   def collection_link_class(current_article, linked_article)

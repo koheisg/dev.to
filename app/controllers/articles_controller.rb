@@ -34,7 +34,7 @@ class ArticlesController < ApplicationController
         page(@page).per(15)
     end
     set_surrogate_key_header "feed", @articles.map(&:record_key)
-    response.headers["Surrogate-Control"] = "max-age=600, stale-while-revalidate=30, stale-if-error=86400"
+    response.headers["Surrogate-Control"] = "max-age=600, stale-while-revalidate=30, stale-if-error=86400" # rubocop:disable Metrics/LineLength
     render layout: false
   end
 
@@ -51,7 +51,7 @@ class ArticlesController < ApplicationController
                    Article.new
                  else
                    Article.new(
-                     body_markdown: "---\ntitle: \npublished: false\ndescription: \ntags: \n---\n\n",
+                     body_markdown: "---\ntitle: \npublished: false\ndescription: \ntags: \n---\n\n", # rubocop:disable Metrics/LineLength
                      processed_html: "",
                    )
                  end
@@ -78,7 +78,7 @@ class ArticlesController < ApplicationController
       if @article
         format.json { render json: @article.errors, status: :unprocessable_entity }
       else
-        format.json { render json: { processed_html: processed_html, title: parsed["title"] }, status: 200 }
+        format.json { render json: { processed_html: processed_html, title: parsed["title"] }, status: 200 } # rubocop:disable Metrics/LineLength
       end
     end
   end
@@ -106,7 +106,7 @@ class ArticlesController < ApplicationController
       handle_org_assignment
       handle_hiring_tag
       if @article.published
-        Notification.send_all(@article, "Published") if @article.previous_changes.include?("published")
+        Notification.send_all(@article, "Published") if @article.previous_changes.include?("published") # rubocop:disable Metrics/LineLength
         path = @article.path
       else
         Notification.remove_all(@article, "Published")

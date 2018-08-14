@@ -2,7 +2,7 @@ class FollowedArticlesController < ApplicationController
   # No authorization required for entirely public controller
 
   caches_action :index,
-    cache_path: Proc.new { "followed_articles_#{current_user.id}__#{current_user.updated_at}__#{user_signed_in?}" },
+    cache_path: Proc.new { "followed_articles_#{current_user.id}__#{current_user.updated_at}__#{user_signed_in?}" }, # rubocop:disable Metrics/LineLength
     expires_in: 35.minutes
 
   def index
@@ -33,18 +33,18 @@ class FollowedArticlesController < ApplicationController
 
   def inappropriate_hiring_instance(article)
     (article.decorate.cached_tag_list_array.include?("hiring") && !article.approved) ||
-      (article.decorate.cached_tag_list_array.include?("hiring") && current_user.cached_followed_tag_names.exclude?("hiring"))
+      (article.decorate.cached_tag_list_array.include?("hiring") && current_user.cached_followed_tag_names.exclude?("hiring")) # rubocop:disable Metrics/LineLength
   end
 
   def article_json(article)
-    Rails.cache.fetch("article_json-#{article.id}-#{article.updated_at}-#{article.comments_count}-#{article.reactions_count}", expires_in: 30.minutes) do
+    Rails.cache.fetch("article_json-#{article.id}-#{article.updated_at}-#{article.comments_count}-#{article.reactions_count}", expires_in: 30.minutes) do # rubocop:disable Metrics/LineLength
       {
         id: article.id,
         path: article.path,
         tag_list: article.decorate.cached_tag_list_array,
         title: article.title,
         published_at_int: article.published_at.to_i,
-        published_at_month_day: article.published_at.strftime("%B #{article.published_at.day.ordinalize}"),
+        published_at_month_day: article.published_at.strftime("%B #{article.published_at.day.ordinalize}"), # rubocop:disable Metrics/LineLength
         is_classic: article.published_at < 7.days.ago,
         comments_count: article.comments_count,
         reactions_count: article.positive_reactions_count,

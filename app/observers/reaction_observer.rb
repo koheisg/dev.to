@@ -3,7 +3,7 @@ class ReactionObserver < ActiveRecord::Observer
     if reaction.points.negative?
       emoji = reaction.category == "thumbsdown" ? ":thumbsdown:" : ":cry:"
       SlackBot.delay.ping(
-        "#{reaction.user.name} (https://dev.to#{reaction.user.path}) \nreacted with a #{reaction.category} on\nhttps://dev.to#{reaction.reactable.path}",
+        "#{reaction.user.name} (https://dev.to#{reaction.user.path}) \nreacted with a #{reaction.category} on\nhttps://dev.to#{reaction.reactable.path}", # rubocop:disable Metrics/LineLength
         channel: "abuse-reports",
         username: "abuse_bot",
         icon_emoji: emoji,

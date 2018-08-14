@@ -43,7 +43,7 @@ class Comment < ApplicationRecord
         :id_code, :readable_publish_date, :parent_id, :positive_reactions_count, :created_at
       attribute :body_html do
         HTML_Truncator.truncate(processed_html,
-          500, ellipsis: '<a class="comment-read-more" href="' + path + '">... Read Entire Comment</a>')
+          500, ellipsis: '<a class="comment-read-more" href="' + path + '">... Read Entire Comment</a>') # rubocop:disable Metrics/LineLength
       end
       attribute :url do
         path
@@ -189,7 +189,7 @@ class Comment < ApplicationRecord
   end
 
   def title
-    ActionController::Base.helpers.truncate(ActionController::Base.helpers.strip_tags(processed_html), length: 60)
+    ActionController::Base.helpers.truncate(ActionController::Base.helpers.strip_tags(processed_html), length: 60) # rubocop:disable Metrics/LineLength
   end
 
   def video
@@ -248,7 +248,7 @@ class Comment < ApplicationRecord
 
   def wrap_timestamps_if_video_present!
     return unless commentable_type != "PodcastEpisode" && commentable.video.present?
-    self.processed_html = processed_html.gsub(/(([0-9]:)?)(([0-5][0-9]|[0-9])?):[0-5][0-9]/) { |s| "<a href='#{commentable.path}?t=#{s}'>#{s}</a>" }
+    self.processed_html = processed_html.gsub(/(([0-9]:)?)(([0-5][0-9]|[0-9])?):[0-5][0-9]/) { |s| "<a href='#{commentable.path}?t=#{s}'>#{s}</a>" } # rubocop:disable Metrics/LineLength
   end
 
   def shorten_urls!

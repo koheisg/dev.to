@@ -49,6 +49,6 @@ class ArticleDecorator < ApplicationDecorator
                else
                  "regular"
                end
-    "?utm_source=#{place}&utm_medium=internal&utm_campaign=#{campaign}&booster_org=#{organization&.slug}"
+    "?utm_source=#{place}&utm_medium=internal&utm_campaign=#{campaign}&booster_org=#{organization&.slug}" # rubocop:disable Metrics/LineLength
   end
 end

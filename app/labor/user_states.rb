@@ -6,7 +6,7 @@ class UserStates
   end
 
   def cached_onboarding_checklist
-    Rails.cache.fetch("user-#{user.id}-#{user.updated_at}-#{user.comments_count}-#{user.articles_count}-#{user.reactions_count}/onboarding_checklist", expires_in: 100.hours) do
+    Rails.cache.fetch("user-#{user.id}-#{user.updated_at}-#{user.comments_count}-#{user.articles_count}-#{user.reactions_count}/onboarding_checklist", expires_in: 100.hours) do # rubocop:disable Metrics/LineLength
       {
         write_your_first_article: made_first_article,
         follow_your_first_tag: follows_a_tag,

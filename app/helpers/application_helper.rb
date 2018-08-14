@@ -31,7 +31,7 @@ module ApplicationHelper
   end
 
   def render_js?
-    !((controller_name == "articles" && (controller.action_name == "index" || controller.action_name == "show")) || controller_name == "pulses")
+    !((controller_name == "articles" && (controller.action_name == "index" || controller.action_name == "show")) || controller_name == "pulses") # rubocop:disable Metrics/LineLength
   end
 
   def title(page_title)
@@ -72,9 +72,9 @@ module ApplicationHelper
     end
     if url&.size&.positive?
       if width
-        "https://res.cloudinary.com/practicaldev/image/fetch/c_scale,fl_progressive,q_auto,w_#{width}/f_auto/#{url}"
+        "https://res.cloudinary.com/practicaldev/image/fetch/c_scale,fl_progressive,q_auto,w_#{width}/f_auto/#{url}" # rubocop:disable Metrics/LineLength
       else
-        "https://res.cloudinary.com/practicaldev/image/fetch/c_scale,fl_progressive,q_auto/f_auto/#{url}"
+        "https://res.cloudinary.com/practicaldev/image/fetch/c_scale,fl_progressive,q_auto/f_auto/#{url}" # rubocop:disable Metrics/LineLength
       end
     else
       "https://res.cloudinary.com/practicaldev/image/fetch/c_scale,fl_progressive,q_1/f_auto/https://pbs.twimg.com/profile_images/481625927911092224/iAVNQXjn_normal.jpeg"
@@ -153,11 +153,11 @@ module ApplicationHelper
   end
 
   def follow_button(followable, style = "full")
-    "<button class='cta follow-action-button' data-info='{\"id\":#{followable.id},\"className\":\"#{followable.class.name}\",\"style\":\"#{style}\"}' data-follow-action-button>&nbsp;</button>".html_safe
+    "<button class='cta follow-action-button' data-info='{\"id\":#{followable.id},\"className\":\"#{followable.class.name}\",\"style\":\"#{style}\"}' data-follow-action-button>&nbsp;</button>".html_safe # rubocop:disable Metrics/LineLength
   end
 
   def user_colors_style(user)
-    "border: 2px solid #{user.decorate.darker_color}; box-shadow: 5px 6px 0px #{user.decorate.darker_color}"
+    "border: 2px solid #{user.decorate.darker_color}; box-shadow: 5px 6px 0px #{user.decorate.darker_color}" # rubocop:disable Metrics/LineLength
   end
 
   def user_colors(user)

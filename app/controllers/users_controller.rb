@@ -108,7 +108,7 @@ class UsersController < ApplicationController
           new(access_token: current_user.identities.where(provider: "github").last.token)
       end
     when "billing"
-      @customer = Stripe::Customer.retrieve(current_user.stripe_id_code) if current_user.stripe_id_code
+      @customer = Stripe::Customer.retrieve(current_user.stripe_id_code) if current_user.stripe_id_code # rubocop:disable Metrics/LineLength
     when "membership"
       if current_user.monthly_dues.zero?
         redirect_to "/membership"

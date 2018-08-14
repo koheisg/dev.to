@@ -41,7 +41,7 @@ class Mention < ApplicationRecord
     end
 
     def create_mention(user)
-      Mention.create(user_id: user.id, mentionable_id: @notifiable.id, mentionable_type: @notifiable.class.name)
+      Mention.create(user_id: user.id, mentionable_id: @notifiable.id, mentionable_type: @notifiable.class.name) # rubocop:disable Metrics/LineLength
     end
   end
 

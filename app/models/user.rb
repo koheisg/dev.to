@@ -92,7 +92,7 @@ class User < ApplicationRecord
   validates :website_url, :employer_name, :employer_url,
             :employment_title, :education, :location,
             length: { maximum: 100 }
-  validates :mostly_work_with, :currently_learning, :currently_hacking_on, :available_for, :mentee_description, :mentor_description,
+  validates :mostly_work_with, :currently_learning, :currently_hacking_on, :available_for, :mentee_description, :mentor_description, # rubocop:disable Metrics/LineLength
             length: { maximum: 500 }
   validate  :conditionally_validate_summary
   validate  :validate_feed_url
@@ -196,7 +196,7 @@ class User < ApplicationRecord
   end
 
   def cached_following_users_ids
-    Rails.cache.fetch("user-#{id}-#{updated_at}-#{following_users_count}/following_users_ids", expires_in: 120.hours) do
+    Rails.cache.fetch("user-#{id}-#{updated_at}-#{following_users_count}/following_users_ids", expires_in: 120.hours) do # rubocop:disable Metrics/LineLength
       # More efficient query. May not cover future edge cases.
       # Should probably only return users who have published lately
       # But this should be okay for most for now.
@@ -459,7 +459,7 @@ class User < ApplicationRecord
   end
 
   def comments_blob
-    ActionView::Base.full_sanitizer.sanitize(comments.last(2).pluck(:body_markdown).join(" "))[0..2500]
+    ActionView::Base.full_sanitizer.sanitize(comments.last(2).pluck(:body_markdown).join(" "))[0..2500] # rubocop:disable Metrics/LineLength
   end
 
   def body_text
@@ -478,7 +478,7 @@ class User < ApplicationRecord
   end
 
   def search_score
-    score = (((articles_count + comments_count + reactions_count) * 10) + tag_keywords_for_search.size) * reputation_modifier * followers_count
+    score = (((articles_count + comments_count + reactions_count) * 10) + tag_keywords_for_search.size) * reputation_modifier * followers_count # rubocop:disable Metrics/LineLength
     score.to_i
   end
 

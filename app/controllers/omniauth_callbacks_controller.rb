@@ -3,6 +3,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   include Devise::Controllers::Rememberable
   def self.provides_callback_for(provider)
     # raise ApplicationConfig["omniauth.auth"].to_yaml
+    # rubocop:disable Metrics/LineLength
     class_eval %{
       def #{provider}
         cta_variant = request.env["omniauth.params"]['state'].to_s
@@ -17,6 +18,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
         end
       end
     }
+    # rubocop:enable Metrics/LineLength
   end
 
   %i[twitter github].each do |provider|

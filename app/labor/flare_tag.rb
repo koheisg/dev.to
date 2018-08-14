@@ -5,7 +5,7 @@ class FlareTag
   end
 
   def tag
-    Rails.cache.fetch("article_flare_tag-#{article.id}-#{article.updated_at}", expires_in: 12.hours) do
+    Rails.cache.fetch("article_flare_tag-#{article.id}-#{article.updated_at}", expires_in: 12.hours) do # rubocop:disable Metrics/LineLength
       flares = ["explainlikeimfive",
                 "ama",
                 "techtalks",

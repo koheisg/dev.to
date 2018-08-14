@@ -10,26 +10,27 @@ class TweetTag < LiquidTagBase
   def render(_context)
     media_div = ""
     quote_div = ""
-    if @tweet.extended_entities_serialized.present? && @tweet.extended_entities_serialized[:media] && @tweet.extended_entities_serialized[:media].size == 1
+    if @tweet.extended_entities_serialized.present? && @tweet.extended_entities_serialized[:media] && @tweet.extended_entities_serialized[:media].size == 1 # rubocop:disable Metrics/LineLength
       media_item = @tweet.extended_entities_serialized[:media].first
       if media_item[:type] == "animated_gif" || media_item[:type] == "video"
         play_butt = image_tag("/assets/play-butt.svg", class: "ltag__twitter-tweet__play-butt")
-        preview_div = "<div class='ltag__twitter-tweet__media--video-preview'><img src='#{media_item[:media_url_https]}'/>#{play_butt}</div>"
-        video_div = "<div class='ltag__twitter-tweet__video'><video loop><source src='#{media_item[:video_info][:variants].last[:url]}' type='#{media_item[:video_info][:variants].last[:content_type]}' /></video></div>"
-        media_div = "<div class='ltag__twitter-tweet__media ltag__twitter-tweet__media__video-wrapper'>#{preview_div}#{video_div}</div>"
+        preview_div = "<div class='ltag__twitter-tweet__media--video-preview'><img src='#{media_item[:media_url_https]}'/>#{play_butt}</div>" # rubocop:disable Metrics/LineLength
+        video_div = "<div class='ltag__twitter-tweet__video'><video loop><source src='#{media_item[:video_info][:variants].last[:url]}' type='#{media_item[:video_info][:variants].last[:content_type]}' /></video></div>" # rubocop:disable Metrics/LineLength
+        media_div = "<div class='ltag__twitter-tweet__media ltag__twitter-tweet__media__video-wrapper'>#{preview_div}#{video_div}</div>" # rubocop:disable Metrics/LineLength
       else
-        media_div = "<div class='ltag__twitter-tweet__media'><img src='#{media_item[:media_url_https]}' /></div>"
+        media_div = "<div class='ltag__twitter-tweet__media'><img src='#{media_item[:media_url_https]}' /></div>" # rubocop:disable Metrics/LineLength
       end
-    elsif @tweet.extended_entities_serialized.present? && @tweet.extended_entities_serialized[:media] && @tweet.extended_entities_serialized[:media].size > 1
+    elsif @tweet.extended_entities_serialized.present? && @tweet.extended_entities_serialized[:media] && @tweet.extended_entities_serialized[:media].size > 1 # rubocop:disable Metrics/LineLength
       # Currently only showing first pic. TODO: show 2-4 pics. But lots of work.
       media_item = @tweet.extended_entities_serialized[:media].first
-      media_div = "<div class='ltag__twitter-tweet__media ltag__twitter-tweet__media__two-pics'><img src='#{media_item[:media_url_https]}' /></div>"
+      media_div = "<div class='ltag__twitter-tweet__media ltag__twitter-tweet__media__two-pics'><img src='#{media_item[:media_url_https]}' /></div>" # rubocop:disable Metrics/LineLength
     end
 
     if @tweet.is_quote_status && @tweet.full_fetched_object_serialized[:quoted_status]
       quoted_status = @tweet.full_fetched_object_serialized[:quoted_status]
-      quote_div = "<div class='ltag__twitter-tweet__quote'><div class='ltag__twitter-tweet__quote__header'><span class='ltag__twitter-tweet__quote__header__name'>#{quoted_status[:user][:name]}</span> @#{quoted_status[:user][:screen_name]}</div>#{quoted_status[:text]}</div>"
+      quote_div = "<div class='ltag__twitter-tweet__quote'><div class='ltag__twitter-tweet__quote__header'><span class='ltag__twitter-tweet__quote__header__name'>#{quoted_status[:user][:name]}</span> @#{quoted_status[:user][:screen_name]}</div>#{quoted_status[:text]}</div>" # rubocop:disable Metrics/LineLength
     end
+    # rubocop:disable Metrics/LineLength
     "<blockquote "\
       'class="ltag__twitter-tweet" data-url="https://twitter.com/' + @tweet.twitter_username + "/status/" + @id + '">'\
       +media_div + \
@@ -52,9 +53,11 @@ class TweetTag < LiquidTagBase
       "</div>"\
       "</div>"\
     "</blockquote>"
+    # rubocop:enable Metrics/LineLength
   end
 
   def self.script
+    # rubocop:disable Metrics/LineLength
     'var videoPreviews = document.getElementsByClassName("ltag__twitter-tweet__media__video-wrapper");
       [].forEach.call(videoPreviews, function(el){
         el.onclick= function(e){
@@ -75,6 +78,7 @@ class TweetTag < LiquidTagBase
         }
       });
       '
+    # rubocop:enable Metrics/LineLength
   end
 
   private

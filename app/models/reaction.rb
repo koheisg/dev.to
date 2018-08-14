@@ -7,7 +7,7 @@ class Reaction < ApplicationRecord
   counter_culture :user
   belongs_to :user
 
-  validates :category, inclusion: { in: %w(like thinking hands unicorn thumbsdown vomit readinglist) }
+  validates :category, inclusion: { in: %w(like thinking hands unicorn thumbsdown vomit readinglist) } # rubocop:disable Metrics/LineLength
   validates :reactable_type, inclusion: { in: %w(Comment Article) }
   validates :user_id, uniqueness: { scope: %i[reactable_id reactable_type category] }
   validate  :permissions
@@ -23,10 +23,10 @@ class Reaction < ApplicationRecord
   as_activity
 
   def self.count_for_reactable(reactable)
-    Rails.cache.fetch("count_for_reactable-#{reactable.class.name}-#{reactable.id}", expires_in: 1.hour) do
-      [{ category: "like", count: Reaction.where(reactable_id: reactable.id, reactable_type: reactable.class.name, category: "like").size },
-       { category: "readinglist", count: Reaction.where(reactable_id: reactable.id, reactable_type: reactable.class.name, category: "readinglist").size },
-       { category: "unicorn", count: Reaction.where(reactable_id: reactable.id, reactable_type: reactable.class.name, category: "unicorn").size }]
+    Rails.cache.fetch("count_for_reactable-#{reactable.class.name}-#{reactable.id}", expires_in: 1.hour) do # rubocop:disable Metrics/LineLength
+      [{ category: "like", count: Reaction.where(reactable_id: reactable.id, reactable_type: reactable.class.name, category: "like").size }, # rubocop:disable Metrics/LineLength
+       { category: "readinglist", count: Reaction.where(reactable_id: reactable.id, reactable_type: reactable.class.name, category: "readinglist").size }, # rubocop:disable Metrics/LineLength
+       { category: "unicorn", count: Reaction.where(reactable_id: reactable.id, reactable_type: reactable.class.name, category: "unicorn").size }] # rubocop:disable Metrics/LineLength
     end
   end
 
@@ -60,9 +60,9 @@ class Reaction < ApplicationRecord
   end
 
   def self.cached_any_reactions_for?(reactable, user, category)
-    Rails.cache.fetch("any_reactions_for-#{reactable.class.name}-#{reactable.id}-#{user.updated_at}-#{category}", expires_in: 24.hours) do
+    Rails.cache.fetch("any_reactions_for-#{reactable.class.name}-#{reactable.id}-#{user.updated_at}-#{category}", expires_in: 24.hours) do # rubocop:disable Metrics/LineLength
       Reaction.
-        where(reactable_id: reactable.id, reactable_type: reactable.class.name, user_id: user.id, category: category).
+        where(reactable_id: reactable.id, reactable_type: reactable.class.name, user_id: user.id, category: category). # rubocop:disable Metrics/LineLength
         any?
     end
   end
@@ -77,7 +77,7 @@ class Reaction < ApplicationRecord
       cache_buster.bust "/reactions?article_id=#{reactable_id}"
     elsif reactable_type == "Comment"
       reactable.save
-      cache_buster.bust "/reactions?commentable_id=#{reactable.commentable_id}&commentable_type=#{reactable.commentable_type}"
+      cache_buster.bust "/reactions?commentable_id=#{reactable.commentable_id}&commentable_type=#{reactable.commentable_type}" # rubocop:disable Metrics/LineLength
     end
     cache_buster.bust user.path
     occasionally_sync_reaction_counts
@@ -90,7 +90,7 @@ class Reaction < ApplicationRecord
   handle_asynchronously :touch_user
 
   def async_bust
-    featured_articles = Article.where(featured: true).order("hotness_score DESC").limit(3).pluck(:id)
+    featured_articles = Article.where(featured: true).order("hotness_score DESC").limit(3).pluck(:id) # rubocop:disable Metrics/LineLength
     if featured_articles.include?(reactable.id)
       reactable.touch
       cache_buster = CacheBuster.new
@@ -129,7 +129,7 @@ class Reaction < ApplicationRecord
   def occasionally_sync_reaction_counts
     # Fixes any out-of-sync positive_reactions_count
     if rand(6) == 1 || reactable.positive_reactions_count.negative?
-      reactable.update_column(:positive_reactions_count, reactable.reactions.where("points > ?", 0).size)
+      reactable.update_column(:positive_reactions_count, reactable.reactions.where("points > ?", 0).size) # rubocop:disable Metrics/LineLength
     end
   end
 

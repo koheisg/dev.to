@@ -42,7 +42,7 @@ class Tweet < ApplicationRecord
     end
     hashtags_serialized.each do |tag|
       tag_text = tag[:text]
-      text.gsub!("#" + tag_text, "<a href='https://twitter.com/hashtag/#{tag_text}'>#{'#' + tag_text}</a>")
+      text.gsub!("#" + tag_text, "<a href='https://twitter.com/hashtag/#{tag_text}'>#{'#' + tag_text}</a>") # rubocop:disable Metrics/LineLength
     end
 
     if extended_entities_serialized && extended_entities_serialized[:media]
@@ -64,7 +64,7 @@ class Tweet < ApplicationRecord
   end
 
   def self.make_tweet_from_api_object(tweeted)
-    t = TwitterBot.new(random_identity).client.status(t.attrs[:retweeted_status][:id_str]) if tweeted.attrs[:retweeted_status]
+    t = TwitterBot.new(random_identity).client.status(t.attrs[:retweeted_status][:id_str]) if tweeted.attrs[:retweeted_status] # rubocop:disable Metrics/LineLength
     tweet = Tweet.where(twitter_id_code: t.attrs[:id_str]).first_or_initialize
     tweet.twitter_uid = t.user.id.to_s
     tweet.twitter_username = t.user.screen_name.downcase

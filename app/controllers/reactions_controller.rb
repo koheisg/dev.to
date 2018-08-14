@@ -27,7 +27,7 @@ class ReactionsController < ApplicationController
       ).select(%i[id positive_reactions_count])
       comment_ids = comments.map(&:id)
       reaction_counts = comments.map { |c| { id: c.id, count: c.positive_reactions_count } }
-      reactions = current_user ? cached_user_positive_reactions(current_user).where(reactable_id: comment_ids) : []
+      reactions = current_user ? cached_user_positive_reactions(current_user).where(reactable_id: comment_ids) : [] # rubocop:disable Metrics/LineLength
       render json:
         {
           current_user: { id: current_user&.id },
@@ -64,7 +64,7 @@ class ReactionsController < ApplicationController
   end
 
   def cached_user_positive_reactions(user)
-    Rails.cache.fetch("cached_user_reactions-#{user.id}-#{user.updated_at}", expires_in: 24.hours) do
+    Rails.cache.fetch("cached_user_reactions-#{user.id}-#{user.updated_at}", expires_in: 24.hours) do # rubocop:disable Metrics/LineLength
       Reaction.where(user_id: user.id).
         where("points > ?", 0)
     end

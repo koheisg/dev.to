@@ -155,7 +155,7 @@ class Article < ApplicationRecord
          ("organization_#{organization_id}" if organization)].flatten.compact
       end
       ranking ["desc(hotness_score)"]
-      add_replica "ordered_articles_by_positive_reactions_count", inherit: true, per_environment: true do
+      add_replica "ordered_articles_by_positive_reactions_count", inherit: true, per_environment: true do # rubocop:disable Metrics/LineLength
         ranking ["desc(positive_reactions_count)"]
       end
       add_replica "ordered_articles_by_published_at", inherit: true, per_environment: true do
@@ -275,7 +275,7 @@ class Article < ApplicationRecord
   end
 
   def search_score
-    score = hotness_score.to_i + ((comments_count * 3).to_i + positive_reactions_count.to_i * 300 * user.reputation_modifier)
+    score = hotness_score.to_i + ((comments_count * 3).to_i + positive_reactions_count.to_i * 300 * user.reputation_modifier) # rubocop:disable Metrics/LineLength
     score.to_i
   end
 
@@ -350,7 +350,7 @@ class Article < ApplicationRecord
 
   def self.seo_boostable(tag = nil)
     keyword_paths = SearchKeyword.
-      where("google_position > ? AND google_position < ? AND google_volume > ? AND google_difficulty < ?",
+      where("google_position > ? AND google_position < ? AND google_volume > ? AND google_difficulty < ?", # rubocop:disable Metrics/LineLength
       3, 20, 1000, 40).pluck(:google_result_path)
     if tag
       Article.where(path: keyword_paths, published: true, featured: true).
@@ -393,7 +393,7 @@ class Article < ApplicationRecord
       self.tag_list = []
       tag_list.add(front_matter["tags"], parser: ActsAsTaggableOn::TagParser)
     end
-    self.published = front_matter["published"] if ["true", "false"].include?(front_matter["published"].to_s)
+    self.published = front_matter["published"] if ["true", "false"].include?(front_matter["published"].to_s) # rubocop:disable Metrics/LineLength
     self.published_at = parsed_date(front_matter["date"]) if published
     self.main_image = front_matter["cover_image"] if front_matter["cover_image"].present?
     self.canonical_url = front_matter["canonical_url"] if front_matter["canonical_url"].present?

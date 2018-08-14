@@ -11,7 +11,7 @@ class FollowsController < ApplicationController
       render plain: "self"
       return
     end
-    render plain: FollowChecker.new(current_user, params[:followable_type], params[:id]).cached_follow_check
+    render plain: FollowChecker.new(current_user, params[:followable_type], params[:id]).cached_follow_check # rubocop:disable Metrics/LineLength
   end
 
   def create
